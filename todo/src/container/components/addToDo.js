@@ -44,6 +44,7 @@ export default function AddTodo(props) {
           description: "",
           dueDate: null,
           piority: 2,
+          checked: false,
           open: 0,
         });
         props.onGetData(allData);

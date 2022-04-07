@@ -9,6 +9,7 @@ function TodoList() {
     description: "",
     dueDate: null,
     piority: 2,
+    checked: false,
     open: 0,
   });
 

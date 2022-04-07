@@ -36,7 +36,7 @@ export default function AllTodo(props) {
   }, [dataChecked, localState]);
 
   function fomatDate(date) {
-    console.log(date);
+    // console.log(date);
     let data = date && date.split("-");
     if (data) return new Date(data[0], data[1] - 1, data[2]);
   }
