@@ -23,7 +23,10 @@ export default function AllTodo(props) {
       (rl1, rl2) =>
         fomatDate(rl1.dueDate).valueOf() - fomatDate(rl2.dueDate).valueOf()
     );
-    console.log(result, "resultresult");
+    result.forEach(item =>{
+        setDataChecked((event) => ({ ...event, [item._id]: item.checked }));
+    })
+    
     // result.open += 1
     setLocalState(result);
   };
