@@ -1,6 +1,6 @@
 import AddTodo from "./components/addToDo";
 import AllTodo from "./components/allTodo";
-import { onGetItem, onSetItem } from "../common/action";
+import { onGetItem, onSetItem, onDeleteItem } from "../common/action";
 import { useState } from "react";
 
 function TodoList() {
@@ -12,7 +12,6 @@ function TodoList() {
     piority: 2,
     open: 0,
   });
-  console.log(dataAdd)
 
   const [allData, setAllData] = useState(
     JSON.parse(localStorage.getItem("TodoList")) || []
@@ -45,11 +44,11 @@ function TodoList() {
   };
 
   const handleDelete = (e, index, id) => {
-    localStorage.removeItem("TodoList");
+    onDeleteItem("TodoList");
     const newData = [...allData];
     newData.splice(index, 1);
     setAllData(newData);
-    localStorage.setItem("TodoList", JSON.stringify(newData));
+    onSetItem("TodoList", JSON.stringify(newData));
   };
 
   const onGetData = (data) => {
