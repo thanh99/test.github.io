@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Input(props) {
   return (
-    <div style={{marginRight: 15}}>
+    <div style={{ marginRight: 15 }}>
       <input style={styles.inputStyle} {...props} />
     </div>
   );
