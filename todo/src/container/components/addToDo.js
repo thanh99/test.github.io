@@ -5,6 +5,7 @@ import Button from "../../components/Button";
 
 export default function AddTodo(props) {
   const [localState, setLocalState] = useState(null);
+
   const changeData = (e) => {
     let newLocalState = {
       ...localState,
@@ -12,9 +13,11 @@ export default function AddTodo(props) {
     };
     setLocalState(newLocalState);
   };
+
   useEffect(() => {
     setLocalState(props.data);
-  }, []);
+  }, [props.data]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (localState.name === "" || localState.description === "") {
@@ -30,13 +33,19 @@ export default function AddTodo(props) {
         props.onGetData(allData);
         onSetItem("TodoList", JSON.stringify(allData));
       } else {
-        onDeleteItem("TodoList");
         const body = {
           ...localState,
-          _id: Math.random(),
+          _id: `${Math.random()}`,
         };
         const allData = props.allData ? props.allData : [];
         allData.push(body);
+        setLocalState({
+          name: "",
+          description: "",
+          dueDate: null,
+          piority: 2,
+          open: 0,
+        });
         props.onGetData(allData);
         onSetItem("TodoList", JSON.stringify(allData));
       }
@@ -51,6 +60,7 @@ export default function AddTodo(props) {
     day = day.length > 1 ? day : "0" + day;
     return year + "-" + month + "-" + day;
   };
+
   return (
     <div>
       <Input

@@ -4,7 +4,6 @@ import { onGetItem, onSetItem, onDeleteItem } from "../common/action";
 import { useState } from "react";
 
 function TodoList() {
-  
   const [dataAdd, setDataAdd] = useState({
     name: "",
     description: "",
@@ -18,20 +17,7 @@ function TodoList() {
   );
   const handleChange = (e) => {};
 
-  // check
-  const handleCheck = (e, index, id) => {
-    localStorage.removeItem("TodoList");
-    const newData = [...allData];
-    newData.forEach((item) => {
-      if (item._id === id) {
-        item.checked = e.target.checked;
-      }
-    });
-    setAllData(newData);
-    onSetItem("TodoList", JSON.stringify(newData));
-  };
-
-  const handleOpen = (e, index, id) => {
+  const handleOpen = (id) => {
     const data = onGetItem("TodoList");
     const newData = [...data];
     newData.forEach((item) => {
@@ -43,12 +29,13 @@ function TodoList() {
     onSetItem("TodoList", JSON.stringify(newData));
   };
 
-  const handleDelete = (e, index, id) => {
-    onDeleteItem("TodoList");
+  const handleDelete = (id) => {
     const newData = [...allData];
-    newData.splice(index, 1);
-    setAllData(newData);
-    onSetItem("TodoList", JSON.stringify(newData));
+    console.log(id)
+    const dataFilter = newData.filter((e) => !id.includes(e._id));
+    console.log(dataFilter, "ppppppp")
+    setAllData(dataFilter);
+    onSetItem("TodoList", JSON.stringify(dataFilter));
   };
 
   const onGetData = (data) => {
@@ -74,7 +61,7 @@ function TodoList() {
       <div style={{ border: "1px solid black", flex: 2 }}>
         <AllTodo
           allData={allData}
-          handleCheck={handleCheck}
+          // handleCheck={handleCheck}
           onDelete={handleDelete}
           handleOpen={handleOpen}
         />
